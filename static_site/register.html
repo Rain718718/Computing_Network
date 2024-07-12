@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" type="text/css" href="style_register.css" /> 
+</head>
+<body>
+    <div id="page">
+        <img src="images/liso_header.png" alt="Liso the Friendly Web Server"></img>
+    </div>
+    <div style="text-align: center;">
+        <h2>Register</h2>
+        <form action="/register" method="post">
+            <label for="username">用户名:</label>
+            <input type="text" id="username" name="username" required><br><br>
+            <label for="password">密码:&nbsp;</label>
+            <input type="password" id="password" name="password" required><br><br>
+            <!-- <input type="submit" value="register"> -->
+            <button class="register" type="button" onclick="Register()">REGISTER</button></p>
+        </form>
+        <p id="Msg"></p>
+        <p id="demo"></p>
+        <p id="info"></p>
+        <p id="secret"></p>
+    </div>
+</body>
+<script>
+    function Register(){
+	var xhttp = new XMLHttpRequest();
+	var userName = document.getElementById("username").value;
+	var passWord = document.getElementById("password").value;
+	xhttp.onreadystatechange = function(){
+		// if (this.readyState==4 && this.status==200){
+		// 	var obj = JSON.parse(this.responseText)
+			document.getElementById("Msg").innerHTML = "注册结果：";
+		// 	var results = obj["Results"];
+			// document.getElementById("demo").innerHTML="您好！来自 ip:" + results["Ip"] + " 的 " + decodeURIComponent(results["name"]) + " 您的注册信息如下";
+		// 	if(obj["Code"]==="400"){
+				// document.getElementById("info").innerHTML="注册失败！<br>" + obj["Msg"];
+		// 	}else {
+		// 		document.getElementById("info").innerHTML="注册成功！<br>您注册的时间是 " + results["created_at"] + "<br>您的密码为 " + results["pass"] + "<br>您是第 " + results["number"] + " 位注册用户";
+		// 	}
+					// document.getElementById("secret").innerHTML="您当前使用的注册接口为 POST，相对安全";
+		// }
+	};
+	var uri = "/cgi/register.py";
+	var para = "uName=" + userName + "&uPass=" + passWord;
+	xhttp.open("POST", uri, true);
+	xhttp.send(para);
+}
+</script>
+</html>
